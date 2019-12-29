@@ -49,20 +49,22 @@ class TerraMysticaMap {
         override fun toString(): String = "$ordinal"
     }
 
-    data class AxialCoordinate(val x:Int, val y:Int){
 
-        operator fun plus(other:AxialCoordinate) : AxialCoordinate {
-            return AxialCoordinate(x+other.x, y + other.y)
-        }
+}
 
-        override fun toString(): String = "$x,$y"
+data class AxialCoordinate(val x:Int, val y:Int){
 
-        override fun equals(other: Any?): Boolean {
-            return if(other is AxialCoordinate){
-                toString() == other.toString()
-            } else false
-        }
-
-        override fun hashCode(): Int = 31 * x + y
+    operator fun plus(other:AxialCoordinate) : AxialCoordinate {
+        return AxialCoordinate(x+other.x, y + other.y)
     }
+
+    override fun toString(): String = "$x,$y"
+
+    override fun equals(other: Any?): Boolean {
+        return if(other is AxialCoordinate){
+            toString() == other.toString()
+        } else false
+    }
+
+    override fun hashCode(): Int = 31 * x + y
 }

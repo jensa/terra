@@ -11,7 +11,7 @@ class State(val players:List<PlayerState>) {
 
     private fun cleanupPhase(){
         //first to pass this round gets to be first player
-        playerOrder = round.playersEndedAt.entries.sortedBy { it.value }.map { it.key }
+        playersTurn = round.playersEndedAt.entries.sortedBy { it.value }.first().key
         if(round.index == 6){
             endGame()
         } else {
