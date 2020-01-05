@@ -10,9 +10,6 @@ enum class Building(powerValue:Int){
     DWELLING(1), TRADING_HOUSE(2), TEMPLE(2), STRONGHOLD(3), SANCTUARY(3)
 }
 
-enum class Cult{
-    Earth, Water, Fire, Air
-}
 
 class AdvanceOnShippingTrack() : Move
 
@@ -60,8 +57,6 @@ By moving 6 Power tokens from Bowl III to Bowl I, you may take Action #1 “Tran
 If these Spades do not suffice to transform a given Terrain space into your Home terrain, you may exchange Workers for the missing Spade – at the current Exchange rate on your Exchange track. If you only need one Spade to transform a Terrain space into your Home terrain, you may spend the second Spade on another Terrain space. However, you may not place a Dwelling on this other space.
  */
 
-class SpecialAction()
-class Pass()
 
 class DoConversion(val conversionType:ConversionType){
 
@@ -71,6 +66,40 @@ enum class ConversionType{
     POWER2PRIEST, POWER2WORKER, POWER2COIN, PRIEST2WORKER, WORKER2COIN
 }
 
+
+class DoubleTurn() : Move
+
+
+class Pass(val newBonus: BonusCard) : Move{
+ //   The first player to pass becomes the Starting player for the next round.
+ //   When passing, immediately return your Bonus card and take one of the three available ones.
+
+}
+
+
+
+/*
+8) Passing and new Starting player
+On your turn, if you cannot or do not want to take any more Action, you have to pass and stop taking Actions for the remainder of this round.
+
+The first player to pass becomes the Starting player for the next round.
+
+When passing, immediately return your Bonus card and take one of the three available ones.
+
+You may get Victory points when returning certain Bonus cards.
+
+When passing and returning the Bonus card depicted on the left, get 1 Victory point for each of your Dwellings on the Game board.
+
+When passing and returning the Bonus card depicted on the left, get 2 Victory points for each of your Trading houses on the Game board.
+
+When passing and returning the Bonus card depicted on the left, get 4 Victory points if you have already built your Stronghold and/or 4 Victory points if you have already built your Sanctuary.
+
+Freely choose which one of the three available Bonus cards you want to take. (You may not immediately take the card that you have just returned.)
+You may wish to put the newly taken Bonus card face-down in front of you to indicate that you have already passed.
+There is no limitation for how many resources you may keep for the next round.
+You may take as many Actions as you wish, even if all other players have already passed. As long as there is at least one player left taking Actions, the current Action phase continues.
+
+ */
 
 
 /*
