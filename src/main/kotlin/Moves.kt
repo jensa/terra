@@ -66,8 +66,17 @@ enum class ConversionType{
     POWER2PRIEST, POWER2WORKER, POWER2COIN, PRIEST2WORKER, WORKER2COIN
 }
 
-
-class DoubleTurn() : Move
+//faction actions
+class DoubleTurn() : Move //After building the Stronghold, take 1 Action token. As a Special action (once per Action phase), you may take a double-turn. (On this double-turn, take any 2 Actions one after another – passing is also considered an Action.) Use the Action token to keep track of using this Special action.
+class TwoSpades() : Move //After building the Stronghold, take an Action token. As a Special action (once per Action phase), get 2 free Spades to transform a reachable Terrain space into your Home terrain. On this space, you may immediately build a Dwelling by paying its costs. Use the Action token to keep track of using this Special action.
+class Sandstorm() : Move //After building the Stronghold, take an Action token. As a Special action (once per Action phase), you may transform a Terrain space directly adjacent to one of your Structures into your Home terrain (Sandstorm). On this space, you may immediately build a Dwelling by paying its costs. (This ability is not applicable past a River space or Bridge.) Use the Action token to keep track of using this Special action. (The Sandstorm is not considered a Spade.)
+class SorcerersStone() : Move // You may trade 1 Victory point for 1 Coin, or 2 Coins for 1 Victory Point anytime and any number of times (Sorcerer’s Stone).
+class OrdinationOfPriests() : Move //After building the Stronghold, you may immediately and only once trade up to 3 Workers for 1 Priest each (Ordination of Priests).
+class UpgradeDwelling() : Move //After building the Stronghold, take an Action token. As a Special action (once per Action phase), you may upgrade a Dwelling to a Trading house. Neither pay Coins, nor Workers for this Trading house. Use the Action token to keep track of using this Special action.
+class AdvanceTwoOnCultTrack() : Move //After building the Stronghold, immediately and only once get 1 Favor tile. Also, take an Action token. As a Special action (once per Action phase), you may advance 2 spaces on a Cult track of your choice (only advancing to space 10 if you have a key). Use the Action token to keep track of using this Special action.
+class WitchesRide() : Move //After building the Stronghold, take an Action token. As a Special action (once per Action phase), you may build 1 Dwelling on an unoccupied Forest space. Neither pay 1 Worker, nor 2 Coins for this Dwelling. For this build only, ignore the adjacency rule. You may build on any free Forest space as long as it has been Forest at the beginning of this Action (Witches’ Ride). (Thus, you may not transform a Terrain space beforehand.) Use the Action token to keep track of using this Special action.
+class BuildBridge() : Move //As an Action, you may build a Bridge for 2 Workers. (You may take this Action any number of times during a round. You may still build Bridges via the respective Power action.)
+class example() : Move
 
 
 class Pass(val newBonus: BonusCard) : Move{
