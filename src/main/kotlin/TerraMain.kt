@@ -11,6 +11,7 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.util.pipeline.PipelineContext
 import io.ktor.util.toMap
+import java.lang.RuntimeException
 
 
 fun main() {
@@ -75,3 +76,4 @@ val mapper: ObjectWriter = jacksonObjectMapper()
     .writer()
 fun toJson(o:Any): String = mapper.writeValueAsString(o)
 
+class IllegalMove(msg:String = "Illegal move"):Throwable()

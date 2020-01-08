@@ -1,21 +1,23 @@
-
-
 interface Move{}
 
 class TransformAndBuild(val hex:AxialCoordinate, val building:Boolean) : Move {
+    //if faction is fakir, they can pay an extra priest to get +1 shipping temp. This gains them 4 VP
+    //if they also have stronghold, it's +2 shipping
 
+    //if faction is Darkling, they pay priests instead of workers
+    //If faction is Dwarves, they can pay 2(1w/ stronghold) workers to get 1+ shipping temp. This gains them 4 VP
 }
-
-enum class Building(powerValue:Int){
-    DWELLING(1), TRADING_HOUSE(2), TEMPLE(2), STRONGHOLD(3), SANCTUARY(3)
-}
-
 
 class AdvanceOnShippingTrack() : Move
 
 class LowerSpadeExchangeRate() : Move
 
-class UpgradeStructure(val hex:AxialCoordinate, val to:Building) : Move
+class UpgradeStructure(val hex:AxialCoordinate, val to:Building) : Move{
+    //founding a town:
+    // Witches:Get 5 additional Victory points when founding a Town.
+    // Swarmlings: Collect 3 Workers when founding a Town.
+
+}
 
 // permanentMove: you can return a priest to the supply (from resources) for 1 move up,
 // but the normal move is permanently moving it to the cult track
@@ -28,43 +30,12 @@ enum class PowerAction(val cost:Int) {
     BRIDGE(3), PRIEST(3), WORKERS(4), COINS(4), ONE_SPADE(4), TWO_SPADES(6)
 }
 
-/*
-Building a Bridge
-By moving 3 Power tokens from Bowl III to Bowl I, you may build a Bridge over a River space. In order to do this, you need to have a Structure on at least one of the Terrain spaces connected by the Bridge. Building the Bridge connects these Terrain spaces and they become directly adjacent to one another.
-
-The Game board indicates where Bridges may be built by depicting unfinished bridges.
-
-Without Shipping, you can only reach a Terrain space beyond a River space by building a Bridge. During your next Action or later, you may then transform this Terrain space and/or build a Dwelling on it (see Action #1).
-Structures connected via Bridges count towards the founding of a Town, whereas indirect adjacency via Shipping does not.
-Once built, you cannot reclaim your Bridges. Keep in mind that you can only build a total of three Bridges.
-1 Priest
-By moving 3 Power tokens from Bowl III to Bowl I, you may take 1 Priest from your supply and put it on your Faction board.
-
-2 Workers
-By moving 4 Power tokens from Bowl III to Bowl I, you may take 2 Workers from the general supply and put them on your Faction board.
-
-7 Coins
-By moving 4 Power tokens from Bowl III to Bowl I, you may take 7 Coins from the general supply and put them on your Faction board.
-
-1 Spade
-By moving 4 Power tokens from Bowl III to Bowl I, you may take Action #1 “Transform and Build” getting 1 free Spade for this purpose.
-
-If this Spade does not suffice to transform a given Terrain space into your Home terrain, you may exchange Workers for the missing Spades – at the current Exchange rate on your Exchange track. (Darklings need to exchange 1 Priest for each missing Spade.)
-
-2 Spades
-By moving 6 Power tokens from Bowl III to Bowl I, you may take Action #1 “Transform and Build” getting 2 free Spades for this purpose.
-
-If these Spades do not suffice to transform a given Terrain space into your Home terrain, you may exchange Workers for the missing Spade – at the current Exchange rate on your Exchange track. If you only need one Spade to transform a Terrain space into your Home terrain, you may spend the second Spade on another Terrain space. However, you may not place a Dwelling on this other space.
- */
-
-
-class DoConversion(val conversionType:ConversionType){
-
-}
+class DoConversion(val conversionType:ConversionType, amount:Int) : Move
 
 enum class ConversionType{
-    POWER2PRIEST, POWER2WORKER, POWER2COIN, PRIEST2WORKER, WORKER2COIN
+    Power2Priest, Power2Worker, Power2Coin, Priest2Worker, Worker2Coin, PowerOne2PowerTwo, PowerTwo2PowerThree, BurnPower
 }
+
 
 //faction actions
 class DoubleTurn() : Move //After building the Stronghold, take 1 Action token. As a Special action (once per Action phase), you may take a double-turn. (On this double-turn, take any 2 Actions one after another – passing is also considered an Action.) Use the Action token to keep track of using this Special action.
@@ -80,10 +51,35 @@ class example() : Move
 
 
 class Pass(val newBonus: BonusCard) : Move{
- //   The first player to pass becomes the Starting player for the next round.
- //   When passing, immediately return your Bonus card and take one of the three available ones.
+    //   The first player to pass becomes the Starting player for the next round.
+    //   When passing, immediately return your Bonus card and take one of the three available ones.
 
+    //Engineers: After building the stronghold, get 3 Victory points for each Bridge connecting two of your Structures.
 }
+
+
+/*
+Building a Bridge
+By moving 3 Power tokens from Bowl III to Bowl I, you may build a Bridge over a River space. In order to do this, you need to have a Structure on at least one of the Terrain spaces connected by the Bridge. Building the Bridge connects these Terrain spaces and they become directly adjacent to one another.
+
+The Game board indicates where Bridges may be built by depicting unfinished bridges.
+
+Without Shipping, you can only reach a Terrain space beyond a River space by building a Bridge. During your next Action or later, you may then transform this Terrain space and/or build a Dwelling on it (see Action #1).
+Structures connected via Bridges count towards the founding of a Town, whereas indirect adjacency via Shipping does not.
+Once built, you cannot reclaim your Bridges. Keep in mind that you can only build a total of three Bridges.
+
+1 Spade
+By moving 4 Power tokens from Bowl III to Bowl I, you may take Action #1 “Transform and Build” getting 1 free Spade for this purpose.
+
+If this Spade does not suffice to transform a given Terrain space into your Home terrain, you may exchange Workers for the missing Spades – at the current Exchange rate on your Exchange track. (Darklings need to exchange 1 Priest for each missing Spade.)
+
+2 Spades
+By moving 6 Power tokens from Bowl III to Bowl I, you may take Action #1 “Transform and Build” getting 2 free Spades for this purpose.
+
+If these Spades do not suffice to transform a given Terrain space into your Home terrain, you may exchange Workers for the missing Spade – at the current Exchange rate on your Exchange track. If you only need one Spade to transform a Terrain space into your Home terrain, you may spend the second Spade on another Terrain space. However, you may not place a Dwelling on this other space.
+ */
+
+
 
 
 

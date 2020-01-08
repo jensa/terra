@@ -18,7 +18,7 @@ enum class Faction(
     val favorTokensPerTemple:Int = 1
 ) {
     ChaosMagicians(
-        Capital(coins = 15, workers = 4, cults = listOf(Cult.Fire, Cult.Fire)),
+        Capital(coins = 15, workers = 4, cults = listOf(Cult.Fire, Cult.Fire), dwellings = 1),
         terrainWheel(Terrain.Red),
         Cost(workers = 4, coins = 4) to Income(workers = 2),
         sanctuaryTrack = Cost(workers = 4, coins = 8) to Income(priests = 1),
@@ -26,13 +26,13 @@ enum class Faction(
         favorTokensPerTemple = 2
     ),
     Giants(
-        Capital(coins = 15, workers = 3, cults = listOf(Cult.Fire, Cult.Air)),
+        Capital(coins = 15, workers = 3, cults = listOf(Cult.Fire, Cult.Air), dwellings = 2),
         (Terrain.allLand().filter { it != Terrain.Red }.map { it to 2 } + (Terrain.Red to 0)).toMap(),
         Cost(workers = 4, coins = 6) to Income(power = 4),
         strongholdMove = TwoSpades()
     ),
     Fakirs(
-        Capital(coins = 15, workers = 3, cults = listOf(Cult.Air, Cult.Fire)),
+        Capital(coins = 15, workers = 3, cults = listOf(Cult.Air, Cult.Fire), dwellings = 2),
         terrainWheel(Terrain.Yellow),
         Cost(workers = 4, coins = 10) to Income(priests = 1),
         spadeSteps = 2,
@@ -40,14 +40,14 @@ enum class Faction(
         powerBowls = PowerBowls(7,5)
     ),
     Nomads(
-        Capital(coins = 15, workers = 2, cults = listOf(Cult.Fire, Cult.Earth), dwellings = 1),
+        Capital(coins = 15, workers = 2, cults = listOf(Cult.Fire, Cult.Earth), dwellings = 3),
         terrainWheel(Terrain.Yellow),
         Cost(workers = 4, coins = 8) to Income(power = 2),
         tradingHouseTrack = Cost(workers = 2, coins = 6) to lowPowerTradingHouseTrack(),
         strongholdMove = Sandstorm()
     ),
     Halflings(
-        Capital(coins = 15, workers = 3, cults = listOf(Cult.Earth, Cult.Air), dwellings = 1),
+        Capital(coins = 15, workers = 3, cults = listOf(Cult.Earth, Cult.Air), dwellings = 2),
         terrainWheel(Terrain.Brown),
         Cost(workers = 4, coins = 8) to Income(power = 2),
         spadeStepCost = Cost(workers = 2, coins = 1, priests = 1),
@@ -55,14 +55,18 @@ enum class Faction(
         strongholdOneTimeBonus = Capital(spades = 3)
     ),
     Cultists(
-        Capital(coins = 15, workers = 3, cults = listOf(Cult.Earth, Cult.Fire)),
+        /*
+        tricky note:
+        Whenever at least one of your opponents decides to take Power due to your building activity, advance 1 space on a Cult track of your choice.
+         */
+        Capital(coins = 15, workers = 3, cults = listOf(Cult.Earth, Cult.Fire), dwellings = 2),
         terrainWheel(Terrain.Brown),
         Cost(workers = 4, coins = 8) to Income(power = 2),
         sanctuaryTrack = Cost(workers = 4, coins = 8) to Income(priests = 1),
         strongholdOneTimeBonus = Capital(victoryPoints = 7)
     ),
     Alchemists(
-        Capital(coins = 15, workers = 3, cults = listOf(Cult.Water, Cult.Fire)),
+        Capital(coins = 15, workers = 3, cults = listOf(Cult.Water, Cult.Fire), dwellings = 2),
         terrainWheel(Terrain.Black),
         Cost(workers = 4, coins = 6) to Income(coins = 6),
         strongholdOneTimeBonus = Capital(power = 12),
@@ -70,7 +74,7 @@ enum class Faction(
         specialMove = SorcerersStone()
     ),
     Darklings(
-        Capital(coins = 15, workers = 1, priests = 1, cults = listOf(Cult.Water, Cult.Earth)),
+        Capital(coins = 15, workers = 1, priests = 1, cults = listOf(Cult.Water, Cult.Earth), dwellings = 2),
         terrainWheel(Terrain.Black),
         Cost(workers = 4, coins = 6) to Income(power = 2),
         sanctuaryTrack = Cost(workers = 4, coins = 10) to Income(priests = 2),
@@ -78,7 +82,7 @@ enum class Faction(
         spadeSteps = 0
     ),
     Mermaids(
-        Capital(coins = 15, workers = 3, cults = listOf(Cult.Water, Cult.Water)),
+        Capital(coins = 15, workers = 3, cults = listOf(Cult.Water, Cult.Water), dwellings = 2),
         terrainWheel(Terrain.Blue),
         Cost(workers = 4, coins = 6) to Income(power = 4),
         sanctuaryTrack = Cost(workers = 4, coins = 8) to Income(priests = 1),
@@ -86,7 +90,7 @@ enum class Faction(
         strongholdOneTimeBonus = Capital(shippingTrackSteps = 1)
     ),
     Swarmlings(
-        Capital(coins = 20, workers = 8, cults = Cult.values().toList()),
+        Capital(coins = 20, workers = 8, cults = Cult.values().toList(), dwellings = 2),
         terrainWheel(Terrain.Blue),
         Cost(workers = 5, coins = 8) to Income(power = 4),
         sanctuaryTrack = Cost(workers = 5, coins = 8) to Income(priests = 2),
@@ -97,7 +101,7 @@ enum class Faction(
         strongholdMove = UpgradeDwelling()
     ),
     Auren(
-        Capital(coins = 15, workers = 3, cults = listOf(Cult.Water, Cult.Air)),
+        Capital(coins = 15, workers = 3, cults = listOf(Cult.Water, Cult.Air), dwellings = 2),
         terrainWheel(Terrain.Green),
         Cost(workers = 4, coins = 6) to Income(power = 2),
         strongholdOneTimeBonus = Capital(favorTokens = 1),
@@ -105,13 +109,13 @@ enum class Faction(
         strongholdMove = AdvanceTwoOnCultTrack()
     ),
     Witches(
-        Capital(coins = 15, workers = 3, cults = listOf(Cult.Air, Cult.Air)),
+        Capital(coins = 15, workers = 3, cults = listOf(Cult.Air, Cult.Air), dwellings = 2),
         terrainWheel(Terrain.Green),
         Cost(workers = 4, coins = 6) to Income(power = 2),
         strongholdMove = WitchesRide()
     ),
     Engineers(
-        Capital(coins = 10, workers = 2, cults = listOf()),
+        Capital(coins = 10, workers = 2, cults = listOf(), dwellings = 2),
         terrainWheel(Terrain.Gray),
         Cost(workers = 3, coins = 6) to Income(power = 2),
         sanctuaryTrack = Cost(workers = 3, coins = 6) to Income(priests = 1),
@@ -122,7 +126,7 @@ enum class Faction(
         specialMove = BuildBridge()
     ),
     Dwarves(
-        Capital(coins = 15, workers = 3, cults = listOf(Cult.Earth, Cult.Earth)),
+        Capital(coins = 15, workers = 3, cults = listOf(Cult.Earth, Cult.Earth), dwellings = 2),
         terrainWheel(Terrain.Gray),
         Cost(workers = 4, coins = 6) to Income(power = 2),
         tradingHouseTrack = Cost(workers = 2, coins = 6) to listOf(Income(power = 1, coins = 3), Income(power = 1, coins = 2), Income(power = 2, coins = 2), Income(power = 2, coins = 3)),
@@ -152,11 +156,19 @@ fun terrainWheel(t:Terrain) : Map<Terrain, Int>{
     return mapOf(t to 0) + oneCosts.map { it to 1 } + twoCosts.map { it to 2 } + threeCosts.map { it to 3 }
 }
 
-class PowerBowls(
-    start1:Int,
-    start2:Int
+data class PowerBowls(
+    val first:Int,
+    val second:Int,
+    val third:Int = 0
 ){
-    var first:Int = start1
-    var second:Int = start2
-    var third:Int = 0
+    fun burn(amount:Int) = if(second < amount * 2) throw IllegalMove() else PowerBowls(first, second - (amount*2), third + amount)
+    fun use(amount:Int) = if(third < amount) throw IllegalMove() else PowerBowls(first + amount, second, third - amount)
+    fun increase(amount:Int) : PowerBowls =
+        when {
+            first >= amount -> { moveToSecond(amount) }
+            first + second >= amount -> { moveToSecond(first).moveToThird(amount - first) }
+            else -> { PowerBowls(0,0, first + second + third) }
+        }
+    private fun moveToSecond(amount:Int) = PowerBowls(first - amount, second + amount, third)
+    private fun moveToThird(amount:Int) = PowerBowls(first, second - amount, third + amount)
 }
