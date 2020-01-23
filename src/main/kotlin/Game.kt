@@ -25,18 +25,21 @@ class Game {
 
     fun isPlayer(token:String) : Boolean = tokens.containsKey(token)
     fun getPlayer(token:String) = tokens[token]
-    fun makeMove(player: Player, toMap: Map<String, List<String>>): State {
-        if(!validate(player, toMap)){
+    fun makeMove(player: Player, params: Map<String, List<String>>): State {
+        if(!validate(player, params)){
             return state
         }
         return state
     }
 
-    fun validate(player: Player, toMap: Map<String, List<String>>): Boolean {
+    fun validate(player: Player, params: Map<String, List<String>>): Boolean {
         if (state.playersTurn != player.index) {
             println("Player ${player.index} tried to make a move, but it wasn't their turn")
             return false
         }
+        //TODO figure out which Move it is, do the required actions using the players PlayerBoardState and the map,
+        // catch InvalidMove-exceptions and return false, else return true - never replace the State (only do that
+
         return true
     }
 }

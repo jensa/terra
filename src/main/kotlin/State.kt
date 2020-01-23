@@ -1,4 +1,4 @@
-
+//TODO consider making this a data class so we can copy() it to set new states when making a move, and keeping the old state when we validate
 class State(val players:List<PlayerState>) {
 
     init {

@@ -7,17 +7,19 @@ class TerraMysticaMap {
 
     private fun column(c:Int) : Map<AxialCoordinate, Hex> {
         return mapOf(
-            hex(c + 0,0, Terrain.BROWN),
-            hex(c + 0,1, Terrain.BROWN),
-            hex(c + -1,2, Terrain.BROWN),
-            hex(c + -1,3, Terrain.BROWN),
-            hex(c + -2,4, Terrain.BROWN),
-            hex(c + -2,5, Terrain.BROWN),
-            hex(c + -3,6, Terrain.BROWN),
-            hex(c + -3,7, Terrain.BROWN),
-            hex(c + -4,8, Terrain.BROWN)
+            hex(c + 0,0, randomTerrain()),
+            hex(c + 0,1, randomTerrain()),
+            hex(c + -1,2, randomTerrain()),
+            hex(c + -1,3, randomTerrain()),
+            hex(c + -2,4, randomTerrain()),
+            hex(c + -2,5, randomTerrain()),
+            hex(c + -3,6, randomTerrain()),
+            hex(c + -3,7, randomTerrain()),
+            hex(c + -4,8, randomTerrain())
         )
     }
+
+    private fun randomTerrain() = Terrain.values().toList().shuffled().first()
 
     private fun neighbours(hex: Hex) : List<Hex> {
         return listOf(
@@ -41,12 +43,6 @@ class TerraMysticaMap {
         @JsonIgnore
         val c: AxialCoordinate
     ){
-    }
-
-
-    enum class Terrain{
-        BROWN,GRAY,GREEN,BLUE,YELLOW,RED,BLACK, WATER;
-        override fun toString(): String = "$ordinal"
     }
 
 
