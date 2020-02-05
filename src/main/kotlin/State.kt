@@ -31,7 +31,7 @@ data class State(val players:List<PlayerState>) {
     fun passTurn(){
         playersTurn = playerOrder[(playerOrder.indexOf(playersTurn)+1) % playerOrder.size] // (playersTurn % players.size) + 1
         //keep track of if everyone passed their turn
-        //maybe calculate bonus points here, or do it at each action
+        //maybe calculate bonus points here, or do it at each action 
     }
 
     fun endActionPhase(player:PlayerState){
