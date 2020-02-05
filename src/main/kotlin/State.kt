@@ -1,5 +1,5 @@
 //TODO consider making this a data class so we can copy() it to set new states when making a move, and keeping the old state when we validate
-class State(val players:List<PlayerState>) {
+data class State(val players:List<PlayerState>) {
 
     init {
         incomePhase()
@@ -31,6 +31,7 @@ class State(val players:List<PlayerState>) {
     fun passTurn(){
         playersTurn = playerOrder[(playerOrder.indexOf(playersTurn)+1) % playerOrder.size] // (playersTurn % players.size) + 1
         //keep track of if everyone passed their turn
+        //maybe calculate bonus points here, or do it at each action
     }
 
     fun endActionPhase(player:PlayerState){
@@ -46,4 +47,8 @@ class State(val players:List<PlayerState>) {
 
 }
 
-data class PlayerState(val id: String, val index: Int, val name:String)
+data class PlayerState(
+    val id: String,
+    val index: Int,
+    val name:String,
+    var boardState:PlayerBoardState)

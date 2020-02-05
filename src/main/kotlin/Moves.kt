@@ -1,6 +1,41 @@
-interface Move{}
+interface Move{
+    fun changeState(state:State) : State
+}
+
+fun parseMove(params:Map<String, List<String>>) : Move{
+    return when(params["move"]?.first()){
+        "TransformAndBuild" -> TransformAndBuild.parse(params)
+        "AdvanceOnShippingTrack" -> AdvanceOnShippingTrack.parse(params)
+        "LowerSpadeExchangeRate" -> LowerSpadeExchangeRate.parse(params)
+        "UpgradeStructure" -> UpgradeStructure.parse(params)
+        "SendPriestToCult" -> SendPriestToCult.parse(params)
+        "UsePowerAction" -> UsePowerAction.parse(params)
+        "DoConversion" -> DoConversion.parse(params)
+        "Pass" -> Pass.parse(params)
+        "DoubleTurn" -> DoubleTurn.parse(params)
+        "TwoSpades" -> TwoSpades.parse(params)
+        "Sandstorm" -> Sandstorm.parse(params)
+        "SorcerersStone" -> SorcerersStone.parse(params)
+        "OrdinationOfPriests" -> OrdinationOfPriests.parse(params)
+        "UpgradeDwelling" -> UpgradeDwelling.parse(params)
+        "AdvanceTwoOnCultTrack" -> AdvanceTwoOnCultTrack.parse(params)
+        "WitchesRide" -> WitchesRide.parse(params)
+        "BuildBridge" -> BuildBridge.parse(params)
+        else -> throw IllegalMove()
+    }
+
+}
 
 class TransformAndBuild(val hex:AxialCoordinate, val building:Boolean) : Move {
+    companion object {
+        fun parse(params:Map<String, List<String>>): TransformAndBuild{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
     //if faction is fakir, they can pay an extra priest to get +1 shipping temp. This gains them 4 VP
     //if they also have stronghold, it's +2 shipping
 
@@ -8,11 +43,40 @@ class TransformAndBuild(val hex:AxialCoordinate, val building:Boolean) : Move {
     //If faction is Dwarves, they can pay 2(1w/ stronghold) workers to get 1+ shipping temp. This gains them 4 VP
 }
 
-class AdvanceOnShippingTrack() : Move
+class AdvanceOnShippingTrack() : Move{
+    companion object {
+        fun parse(params:Map<String, List<String>>): AdvanceOnShippingTrack{
 
-class LowerSpadeExchangeRate() : Move
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
+
+class LowerSpadeExchangeRate() : Move{
+    companion object {
+        fun parse(params:Map<String, List<String>>): LowerSpadeExchangeRate{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 
 class UpgradeStructure(val hex:AxialCoordinate, val to:Building) : Move{
+    companion object {
+        fun parse(params:Map<String, List<String>>): UpgradeStructure{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
     //founding a town:
     // Witches:Get 5 additional Victory points when founding a Town.
     // Swarmlings: Collect 3 Workers when founding a Town.
@@ -21,16 +85,47 @@ class UpgradeStructure(val hex:AxialCoordinate, val to:Building) : Move{
 
 // permanentMove: you can return a priest to the supply (from resources) for 1 move up,
 // but the normal move is permanently moving it to the cult track
-class SendPriestToCult(val permanentMove:Boolean = true) : Move
+class SendPriestToCult(val permanentMove:Boolean = true) : Move {
+    companion object {
+        fun parse(params:Map<String, List<String>>): SendPriestToCult{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 
 //spades action has an immediate secondary action, but other have null
-class UsePowerAction(val powerAction:PowerAction, val secondaryMove:Move?) : Move
+class UsePowerAction(val powerAction:PowerAction, val secondaryMove:Move?) : Move {
+    companion object {
+        fun parse(params:Map<String, List<String>>): UsePowerAction{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+}
 
 enum class PowerAction(val cost:Int) {
     BRIDGE(3), PRIEST(3), WORKERS(4), COINS(4), ONE_SPADE(4), TWO_SPADES(6)
 }
 
-class DoConversion(val conversionType:ConversionType, amount:Int) : Move
+class DoConversion(val conversionType:ConversionType, amount:Int) : Move {
+    companion object {
+        fun parse(params:Map<String, List<String>>): DoConversion{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 
 enum class ConversionType{
     Power2Priest, Power2Worker, Power2Coin, Priest2Worker, Worker2Coin, PowerOne2PowerTwo, PowerTwo2PowerThree, BurnPower
@@ -39,18 +134,126 @@ enum class ConversionType{
 
 //faction actions
 class DoubleTurn() : Move //After building the Stronghold, take 1 Action token. As a Special action (once per Action phase), you may take a double-turn. (On this double-turn, take any 2 Actions one after another – passing is also considered an Action.) Use the Action token to keep track of using this Special action.
+{
+    companion object {
+        fun parse(params:Map<String, List<String>>): DoubleTurn{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
+
 class TwoSpades() : Move //After building the Stronghold, take an Action token. As a Special action (once per Action phase), get 2 free Spades to transform a reachable Terrain space into your Home terrain. On this space, you may immediately build a Dwelling by paying its costs. Use the Action token to keep track of using this Special action.
+{
+    companion object {
+        fun parse(params:Map<String, List<String>>): TwoSpades {
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 class Sandstorm() : Move //After building the Stronghold, take an Action token. As a Special action (once per Action phase), you may transform a Terrain space directly adjacent to one of your Structures into your Home terrain (Sandstorm). On this space, you may immediately build a Dwelling by paying its costs. (This ability is not applicable past a River space or Bridge.) Use the Action token to keep track of using this Special action. (The Sandstorm is not considered a Spade.)
+{
+    companion object {
+        fun parse(params:Map<String, List<String>>): Sandstorm{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 class SorcerersStone() : Move // You may trade 1 Victory point for 1 Coin, or 2 Coins for 1 Victory Point anytime and any number of times (Sorcerer’s Stone).
+{
+    companion object {
+        fun parse(params:Map<String, List<String>>): SorcerersStone{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 class OrdinationOfPriests() : Move //After building the Stronghold, you may immediately and only once trade up to 3 Workers for 1 Priest each (Ordination of Priests).
+{
+    companion object {
+        fun parse(params:Map<String, List<String>>): OrdinationOfPriests {
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 class UpgradeDwelling() : Move //After building the Stronghold, take an Action token. As a Special action (once per Action phase), you may upgrade a Dwelling to a Trading house. Neither pay Coins, nor Workers for this Trading house. Use the Action token to keep track of using this Special action.
+{
+    companion object {
+        fun parse(params:Map<String, List<String>>): UpgradeDwelling{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 class AdvanceTwoOnCultTrack() : Move //After building the Stronghold, immediately and only once get 1 Favor tile. Also, take an Action token. As a Special action (once per Action phase), you may advance 2 spaces on a Cult track of your choice (only advancing to space 10 if you have a key). Use the Action token to keep track of using this Special action.
+{
+    companion object {
+        fun parse(params:Map<String, List<String>>): AdvanceTwoOnCultTrack{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 class WitchesRide() : Move //After building the Stronghold, take an Action token. As a Special action (once per Action phase), you may build 1 Dwelling on an unoccupied Forest space. Neither pay 1 Worker, nor 2 Coins for this Dwelling. For this build only, ignore the adjacency rule. You may build on any free Forest space as long as it has been Forest at the beginning of this Action (Witches’ Ride). (Thus, you may not transform a Terrain space beforehand.) Use the Action token to keep track of using this Special action.
+{
+    companion object {
+        fun parse(params:Map<String, List<String>>): WitchesRide{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 class BuildBridge() : Move //As an Action, you may build a Bridge for 2 Workers. (You may take this Action any number of times during a round. You may still build Bridges via the respective Power action.)
-class example() : Move
+{
+    companion object {
+        fun parse(params:Map<String, List<String>>): BuildBridge{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 
 
 class Pass(val newBonus: BonusCard) : Move{
+    companion object {
+        fun parse(params:Map<String, List<String>>): Pass{
+
+        }
+    }
+
+    override fun changeState(state: State): State {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
     //   The first player to pass becomes the Starting player for the next round.
     //   When passing, immediately return your Bonus card and take one of the three available ones.
 

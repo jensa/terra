@@ -13,7 +13,7 @@ class Game {
 
     fun start() {
         started = true
-        internalState = State(players.mapIndexed{i,p -> PlayerState(p.id, i, "Player $i")})
+        internalState = State(players.mapIndexed{i,p -> PlayerState(p.id, i, "Player $i", PlayerBoardState.randomFaction())})
     }
 
     fun addPlayer() : Pair<String,Int> {
@@ -26,9 +26,8 @@ class Game {
     fun isPlayer(token:String) : Boolean = tokens.containsKey(token)
     fun getPlayer(token:String) = tokens[token]
     fun makeMove(player: Player, params: Map<String, List<String>>): State {
-        if(!validate(player, params)){
-            return state
-        }
+        try { internalState = parseMove(params).changeState(state)
+        } catch (e:IllegalMove) { }
         return state
     }
 
@@ -38,8 +37,13 @@ class Game {
             return false
         }
         //TODO figure out which Move it is, do the required actions using the players PlayerBoardState and the map,
-        // catch InvalidMove-exceptions and return false, else return true - never replace the State (only do that
-
+        // catch IllegalMove-exceptions and return false, else return true - never replace the State (only do that in makeMove())
+        //TODO maybe using error pages to catch exceptions would be more ktor-y
+        try {
+            parseMove(params).changeState(state)
+        } catch (e:IllegalMove) {
+            return false
+        }
         return true
     }
 }

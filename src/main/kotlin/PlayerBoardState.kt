@@ -11,4 +11,8 @@ data class PlayerBoardState(
         victoryPoints = if(faction == Faction.Halflings) victoryPoints + amount else victoryPoints)
 
     fun hasStronghold() = buildings.any { it == Building.STRONGHOLD }
+
+    companion object {
+        fun randomFaction() = PlayerBoardState(Faction.values().random())
+    }
 }
